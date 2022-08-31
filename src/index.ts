@@ -1,12 +1,18 @@
-import express from "express";
+import express, { json } from "express";
 import cors from "cors";
+import dotenv from "dotenv";
 
-const app = express();
+async function main() {
+  dotenv.config();
+  const app = express();
 
-app.use(cors());
+  app.use(cors());
+  app.use(json());
 
-const PORT = 5000;
+  const PORT = process.env.PORT;
+  app.listen(PORT, () => {
+    console.log(`Servidor subiu na porta: ${PORT}`);
+  });
+}
 
-app.listen(PORT, () => {
-  console.log(`Servidor subiu na porta: ${PORT}`);
-});
+main().catch(console.error);
